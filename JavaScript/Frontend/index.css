@@ -1,0 +1,140 @@
+
+#root {
+    --bg-image: url('../puzzle.jpg');
+    --bg-image-opacity: 0.3;
+    --div-background-color: white;
+    --div-opacity: 0.80;
+   
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    isolation: isolate;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#root::after{
+    background-image: var(--bg-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: var(--bg-image-opacity);
+
+}
+
+div#searching {
+    background-color: var(--div-background-color);
+    opacity: var(--div-opacity);
+    border-radius: 25px;
+    width: 60vw;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px
+}
+
+h1 {
+    font-size: 150px;
+    text-align: center;
+    margin-top: 5vh;
+    margin-bottom: 20px;
+}
+
+input {
+    height: 2em;
+    min-width: 15em;
+    max-width: 20em;
+    padding-top: 10;
+    margin-top: 23px;
+    border-radius: 20px;
+    font-size: 30px;
+}
+input:focus{
+    background-color: rgb(248, 248, 248);
+    
+}
+
+
+button {
+    height: 2em;
+    width: 5em;
+    margin-top: 24px;
+    margin-left: 10px;
+    border-radius: 20px;
+    font-size: 26px;
+
+}
+button {
+    --c: #C0C0C0;
+    /* the color*/
+
+    box-shadow: 0 0 0 .1em inset var(--c);
+    --_g: linear-gradient(var(--c) 0 0) no-repeat;
+    background:
+        var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+        var(--_g) calc(200% - var(--_p, 0%)) 0%,
+        var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+        var(--_g) calc(200% - var(--_p, 0%)) 100%;
+    background-size: 50.5% calc(var(--_p, 0%)/2 + .5%);
+    outline-offset: .1em;
+    transition: background-size .4s, background-position 0s .4s;
+}
+
+button:hover {
+    --_p: 100%;
+    transition: background-position .4s, background-size 0s;
+}
+
+button:active {
+    box-shadow: 0 0 9e9q inset #0009;
+    background-color: var(--c);
+    color: #fff;
+}
+
+div#info {
+    background-color: var(--div-background-color);
+    opacity: var(--div-opacity);
+    height: 55vh;
+    width: 70vw;
+    border: black 1px;
+    border-radius: 25px;
+    margin-top: 30px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}
+section{
+    display: flex;
+    flex-direction: row;
+}
+
+h3{
+    font-size: 50px;
+    text-align: center;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    margin-bottom: 0;
+}
+
+h4 {
+    font-size: 25px;
+    margin-left: 20px;
+    
+}
+
+
+p {
+    font-size: 20px;
+    margin-top: 26px;
+    margin-left: 15px;
+    line-height: 40px;
+    margin-right: 10px;
+}
+
