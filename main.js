@@ -13,6 +13,17 @@ let noun = document.getElementById("noun");
 let verb = document.getElementById("verb");
 let adverb = document.getElementById("adverb");
 let adjective = document.getElementById("adjective");
+
+//get heading
+const nounHeading = document.getElementById('noun-heading');
+const verbHeading = document.getElementById("verb-heading");
+const adverbHeading = document.getElementById("adverb-heading");
+const adjectiveHeading = document.getElementById("adjective-heading");
+
+// get all horizontal lines
+const verbLine = document.getElementById("verb-line");
+const adverbLine = document.getElementById("adverb-line");
+const adjectiveLine = document.getElementById("adjective-line");
   
 //test if the button works
 /* button.addEventListener("click", () => {
@@ -35,24 +46,51 @@ async function getDefinition(word) {
 
   const obj = await JSON.parse(data.payload)
   console.log("this is obj", obj)
+  
 
-  const meaning = document.querySelector("#meaning");
+  let meaning = document.querySelector("#meaning");
   meaning.textContent = obj.entry;
 
    const noun = document.querySelector("#noun");
   noun.textContent = obj.meaning.noun;
 
+  //console.log(noun.textContent)
+  if (obj.meaning.noun === "") {
+    noun.style.display = "none";
+    nounHeading.style.display = "none";
+  }
+
   const verb = document.querySelector("#verb");
   verb.textContent = obj.meaning.verb;
+
+  if (obj.meaning.verb === "") {
+    verb.style.display = "none";
+    verbHeading.style.display = "none";
+    verbLine.style.display = "none";
+  }
 
   const adverb = document.querySelector("#adverb");
   adverb.textContent = obj.meaning.adverb;
 
+  if (obj.meaning.adverb === "") {
+    adverb.style.display = "none";
+    adverbHeading.style.display = "none";
+    adverbLine.style.display = "none";
+  }
+
   const adjective = document.querySelector("#adjective"); 
   adjective.textContent = obj.meaning.adjective;
 
+  if (obj.meaning.adjective === "") {
+    adjective.style.display = "none";
+    adjectiveHeading.style.display = "none";
+    adjectiveLine.style.display = "none";
+  }
+
   //inputSearch.value = ""; 
 } 
+
+
 
 button.addEventListener("click", () => {
 console.log(inputSearch.value)
@@ -61,3 +99,8 @@ console.log(inputSearch.value)
   
  inputSearch.value="";
 });
+
+/* if (noun.textContent == undefined || ""){
+  noun.style.display = "none";
+  nounHeading.style.display = 'none';
+ } */

@@ -1,0 +1,152 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+:root{
+    
+}
+
+body{
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    isolation: isolate;
+    margin: 0;
+    font-family: sans-serif;
+    
+}
+
+body::after {
+    background-image: linear-gradient(rgba(250, 250, 250, 0.5), rgba(250, 250, 250, 0.5)),url("./puzzle.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    opacity: 0.8;
+}
+
+/* HEADING */
+h1{
+    font-size: 5em;
+    letter-spacing: 3px;
+    margin-top: 8vh;
+    margin-bottom: 2vh;
+}
+
+@media only screen and (max-width:720px){
+h1 {
+        font-size: 3em;
+        
+    }
+
+
+}
+
+/* SEARCH SECTION */
+#searching{
+    background-color: rgba(197, 195, 196, 0.8); 
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    
+    margin-bottom: 7vh;
+    
+    border-radius: 10px;
+}
+
+input{
+    margin: 20px 0 20px 20px;
+    width: 80%;
+    resize: vertical;
+    border-radius:10px;
+    padding: 10px;
+    text-indent: 5px;
+    text-overflow: ellipsis;
+}
+
+/* input:focus{
+    
+} */
+
+button{
+    margin: 20px 10px 20px 10px;
+    border-radius: 10px;
+    padding: 3px 6px;
+}
+
+@media only screen and (max-width:720px) {
+    input{
+        padding: 5px;
+    }
+}
+
+@media only screen and (max-width:350px) {
+    #searching {
+        min-width: 250px;
+
+    }
+    
+}
+
+/* INFO */
+#info{
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px ;
+    padding-bottom: 10px;
+
+    margin-bottom: 10vh;
+}
+
+
+#meaning{
+    
+    height: auto;
+    padding-top: 10px;
+    font-size: 2.5em;
+    text-transform: capitalize;
+    text-align: center;
+    text-decoration: underline;
+    
+}
+
+#definitions{
+    height: auto; 
+   
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+h4{
+    width: 110px;
+    text-align: center;
+    margin: auto 0;
+
+}
+
+p{
+    width: 100%;
+    margin: 15px ;
+}
+
+@media only screen and (max-width:720px) {
+   #meaning{
+    font-size: 1.5em;
+   }
+   p{
+    font-size: 14px;
+   }
+}

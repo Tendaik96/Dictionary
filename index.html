@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="index.css" />
+    <link type="text/css" rel="stylesheet" href="styles.css" />
     <title>Document</title>
 </head>
 
@@ -13,35 +13,39 @@
     <h1>Dictionary</h1>
     <div id="searching">
 
-        <input id="searchBox" type="search" name="search" value="" placeholder="Search for a word" required/>
+        <input id="searchBox" type="search" name="search" value="" placeholder="Search for any word" required/>
         <button id="button">Search</button>
     </div>
     <div id="info">
         <h3 id="meaning"></h3>
-        <section>
-            <h4>Noun:</h4>
-            <p id="noun"></p>
-        </section>
 
-        <hr />
-        <section>
-            <h4>Verb:</h4>
-            <p id="verb"></p>
-        </section>
+        <div id="definitions">
+            <section>
+                <h4 id="noun-heading">Noun:</h4>
+                <p id="noun"></p>
+            </section>
 
-        <hr />
+            <hr id="verb-line"/>
+            <section>
+                <h4 id="verb-heading">Verb:</h4>
+                <p id="verb"></p>
+            </section>
 
-        <section>
-            <h4>Adverb:</h4>
-            <p id="adverb"></p>
-        </section>
+            <hr id="adverb-line"/>
 
-        <hr />
+            <section>
+                <h4 id="adverb-heading">Adverb:</h4>
+                <p id="adverb"></p>
+            </section>
 
-        <section>
-            <h4>Adjective:</h4>
-            <p id="adjective"></p>
-        </section>
+            <hr id="adjective-line"//>
+
+            <section>
+                <h4 id="adjective-heading">Adjective:</h4>
+                <p id="adjective"></p>
+            </section>
+        </div>
+
     </div>
 
 
