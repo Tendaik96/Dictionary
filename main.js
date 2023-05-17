@@ -60,6 +60,7 @@ if (meaning.textContent == "") {
   initialDisplay.style.margin = "auto 0";
   body.style.minHeight = '100vh';
   input.style.width = '100%';
+  antonymsDetail.style.display = 'none';
 } 
 
 
@@ -152,7 +153,7 @@ async function getDefinition(word) {
   //inputSearch.value = ""; 
 } 
 
-async function getDetails(word) {
+async function getAudio(word) {
   let response = await fetch(
     `http://api.dictionaryapi.dev/api/v2/entries/en/${word.value}`,
     {
@@ -162,7 +163,7 @@ async function getDetails(word) {
   const data = await response.json();
 
   //console.log(data[0].phonetics[0].audio);
-  console.log(data[0]);
+  //console.log(data[0]);
 
   phonetic.textContent = data[0].phonetic;
   let audioLocation = data[0].phonetics[0].audio;
@@ -180,28 +181,6 @@ async function getDetails(word) {
   } else if (data[0].phonetics[1].audio !== "" && audioLocation !== "") {
     audio.style.display = "none";
   } 
-
-  /////////////////////////////////////START HERE//////////////////////////
-  antonymsBtn.addEventListener('click', () => {
-    antonymsDetail.style.display = "block";
-
-    
-      //antonyms.textContent = data[0].meaning[0].antonyms.split()
-    
-    console.log("index 0", data[0].meanings[0].antonyms.split());
-     console.log("index 1", data[0].meanings[1].antonyms.split());
-    
-  if (data[0].meanings[0].antonyms == "" || []) {
-    antonyms.textContent = data[0].meanings[0].antonyms.split();
-    antonymsBtn.style.display = "inline-block";
-  } else if (data[0].meanings[1].antonyms == "" || []) {
-    antonymsBtn.style.display = "none";
-  }
-  })
-  
-  
-
-
     console.log("....", audio);
 }
 
@@ -211,24 +190,13 @@ button.addEventListener("click", (e) => {
   e.preventDefault();
 console.log(inputSearch.value)
   let firstAPI = getDefinition(inputSearch)
-  let secondAPI = getDetails(inputSearch);
+  let secondAPI = getAudio(inputSearch);
+  let antonymsAPI = getAntonyms(inputSearch)
 
-  if (firstAPI !== '' && secondAPI !== '') {
-    initialDisplay.style.margin = "8vh 0 0 0";
+  if (firstAPI !== '' ) {
+    initialDisplay.style.margin = "8vh 0 5vh 0";
     info.style.display = "block";
-    
-    
-    //initialDisplay.style.transition ="1s";
   }
-
-  
-
-
-  
-  
-    //console.log(meaning)
-    //console.log("this is details", details);
-
     inputSearch.value = "";
 });
 
@@ -236,3 +204,38 @@ console.log(inputSearch.value)
   noun.style.display = "none";
   nounHeading.style.display = 'none';
  } */
+
+async function getAntonyms(word) {
+  const response = await fetch(`http://localhost:3000/antonym/${word.value}`);
+
+  const data = await response.json();
+  //console.log("this is data", data);
+
+  const obj = await JSON.parse(data.payload.antonym);
+  console.log("this is objj", obj.antonyms.length);
+
+// condition needs to be outside
+if (obj.antonyms.length == 0) {
+    antonymsBtn.style.display = "none";
+} else{
+  antonymsBtn.style.display = "block";
+   antonymsBtn.addEventListener('click', () => {
+
+    if (antonymsDetail.style.display === "none") {
+      antonymsDetail.style.display = "flex";
+
+      if (data.payload.antonym.antonyms !== "" || []) {
+        antonyms.textContent = obj.antonyms.join(", ");
+        antonymsBtn.style.display = "block";
+      }
+    } else {
+      antonymsDetail.style.display = "none";
+    }
+
+  });
+  
+}
+  
+}
+
+   
