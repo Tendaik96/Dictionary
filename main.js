@@ -41,13 +41,20 @@ const dictionary = document.getElementById('dictionary')
 }); */
 if (meaning.textContent == "") {
   info.style.display = 'none';
-  initialDisplay.style.margin = "auto 0";
-  body.style.height = '100vh';
-  input.style.width = '100%';
-  input.style.fontSize = '20px'
-  dictionary.style.fontSize = '100px'
   
-} 
+  
+  initialDisplay.style.margin = "auto 0";
+  // initialDisplay.style.transitionProperty = "initialDisplay.style.margin";
+  // initialDisplay.style.transitionDuration = '1s';
+  // initialDisplay.style.transitionTimingFunction = 'ease-in';
+  body.style.minHeight = '100vh';
+  input.style.width = '100%';
+  //input.style.fontSize = '20px'
+  //dictionary.style.fontSize = '100px'
+  
+} else {
+  
+}
 console.log(meaning)
 
 
@@ -171,21 +178,29 @@ async function getDetails(word) {
 
 
 
-button.addEventListener("click", () => {
+button.addEventListener("click", (e) => {
+  e.preventDefault
 console.log(inputSearch.value)
   let firstAPI = getDefinition(inputSearch)
   let secondAPI = getDetails(inputSearch);
 
   if (firstAPI !== '' && secondAPI !== '') {
-    initialDisplay.style.marginTop = '8vh'
+    initialDisplay.style.margin = "8vh 0 0 0";
     info.style.display = "block";
-    initialDisplay.style.transition=
-      "initialDisplay.style.marginTop 1s ease-in";
+    
+    
+    //initialDisplay.style.transition ="1s";
   }
-  //console.log(meaning)
-  //console.log("this is details", details);
+
   
- inputSearch.value="";
+
+
+  
+  
+    //console.log(meaning)
+    //console.log("this is details", details);
+
+    inputSearch.value = "";
 });
 
 /* if (noun.textContent == undefined || ""){
