@@ -29,33 +29,40 @@ const adjectiveLine = document.getElementById("adjective-line");
 
 // his info section
 const info = document.getElementById('info');
+const options = document.getElementById('options')
 const initialDisplay = document.getElementById("inital-display");
 const body = document.querySelector('body');
 const input = document.querySelector('input')
 const dictionary = document.getElementById('dictionary')
 
+//detail buttons display
+const antonymsDetail = document.getElementById("antonyms-detail");
+const synonymsDetail = document.getElementById("synonyms-detail");
+const exampleDetail = document.getElementById("example-detail");
+
+// details heading
+const antonymsHeading = document.getElementById("antonyms-heading");
+const antonyms = document.getElementById("antonyms");
+const antonymsBtn = document.getElementById("antonyms-btn");
+
+antonymsDetail.style.display = 'none';
+synonymsDetail.style.display = "none";
+exampleDetail.style.display = "none";
   
 //test if the button works
 /* button.addEventListener("click", () => {
    console.log("clicked")
 }); */
+
+
 if (meaning.textContent == "") {
   info.style.display = 'none';
-  
-  
   initialDisplay.style.margin = "auto 0";
-  // initialDisplay.style.transitionProperty = "initialDisplay.style.margin";
-  // initialDisplay.style.transitionDuration = '1s';
-  // initialDisplay.style.transitionTimingFunction = 'ease-in';
   body.style.minHeight = '100vh';
   input.style.width = '100%';
-  //input.style.fontSize = '20px'
-  //dictionary.style.fontSize = '100px'
-  
-} else {
-  
-}
-console.log(meaning)
+} 
+
+
 
 
 //check input value in console - value prints in console
@@ -83,11 +90,12 @@ async function getDefinition(word) {
   //console.log("this is data", data);
 
   const obj = await JSON.parse(data.payload);
-  //console.log("this is obj", obj);
+  console.log("this is obj", obj);
 
   let meaning = document.querySelector("#meaning");
   meaning.textContent = obj.entry;
 
+//NOUN
    const noun = document.querySelector("#noun");
   noun.textContent = obj.meaning.noun;
 
@@ -173,13 +181,34 @@ async function getDetails(word) {
     audio.style.display = "none";
   } 
 
+  /////////////////////////////////////START HERE//////////////////////////
+  antonymsBtn.addEventListener('click', () => {
+    antonymsDetail.style.display = "block";
+
+    
+      //antonyms.textContent = data[0].meaning[0].antonyms.split()
+    
+    console.log("index 0", data[0].meanings[0].antonyms.split());
+     console.log("index 1", data[0].meanings[1].antonyms.split());
+    
+  if (data[0].meanings[0].antonyms == "" || []) {
+    antonyms.textContent = data[0].meanings[0].antonyms.split();
+    antonymsBtn.style.display = "inline-block";
+  } else if (data[0].meanings[1].antonyms == "" || []) {
+    antonymsBtn.style.display = "none";
+  }
+  })
+  
+  
+
+
     console.log("....", audio);
 }
 
 
 
 button.addEventListener("click", (e) => {
-  e.preventDefault
+  e.preventDefault();
 console.log(inputSearch.value)
   let firstAPI = getDefinition(inputSearch)
   let secondAPI = getDetails(inputSearch);
