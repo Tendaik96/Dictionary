@@ -6,8 +6,10 @@ let inputSearch = document.querySelector("#searchBox");
 // capture button
 const button = document.querySelector("#button");
 
-// get all headings by id
+//get phonetic
+const phonetic = document.querySelector('#phonetic')
 
+// get all paragraph by id
 let meaning = document.getElementById('meaning')
 let noun = document.getElementById("noun");
 let verb = document.getElementById("verb");
@@ -24,11 +26,30 @@ const adjectiveHeading = document.getElementById("adjective-heading");
 const verbLine = document.getElementById("verb-line");
 const adverbLine = document.getElementById("adverb-line");
 const adjectiveLine = document.getElementById("adjective-line");
+
+// his info section
+const info = document.getElementById('info');
+const initialDisplay = document.getElementById("inital-display");
+const body = document.querySelector('body');
+const input = document.querySelector('input')
+const dictionary = document.getElementById('dictionary')
+
   
 //test if the button works
 /* button.addEventListener("click", () => {
    console.log("clicked")
 }); */
+if (meaning.textContent == "") {
+  info.style.display = 'none';
+  initialDisplay.style.margin = "auto 0";
+  body.style.height = '100vh';
+  input.style.width = '100%';
+  input.style.fontSize = '20px'
+  dictionary.style.fontSize = '100px'
+  
+} 
+console.log(meaning)
+
 
 //check input value in console - value prints in console
 
@@ -37,16 +58,25 @@ const adjectiveLine = document.getElementById("adjective-line");
 //   getDefinition(inputSearch);
 // });
 
+const audio = document.querySelector('audio');
+/* function audioDisplay() {
+  if(audio.src == "" || null || undefined) {
+  audio.style.display = "none";
+}
+}
+
+audioDisplay() */
+
+
 async function getDefinition(word) {
 
   const response = await fetch(`http://localhost:3000/definition/${word.value}`);
 
   const data = await response.json();
-  console.log("this is data", data)
+  //console.log("this is data", data);
 
-  const obj = await JSON.parse(data.payload)
-  console.log("this is obj", obj)
-  
+  const obj = await JSON.parse(data.payload);
+  //console.log("this is obj", obj);
 
   let meaning = document.querySelector("#meaning");
   meaning.textContent = obj.entry;
@@ -58,6 +88,9 @@ async function getDefinition(word) {
   if (obj.meaning.noun === "") {
     noun.style.display = "none";
     nounHeading.style.display = "none";
+  } else {
+    noun.style.display = "block";
+    nounHeading.style.display = "block";
   }
 
   const verb = document.querySelector("#verb");
@@ -67,6 +100,10 @@ async function getDefinition(word) {
     verb.style.display = "none";
     verbHeading.style.display = "none";
     verbLine.style.display = "none";
+  } else {
+    verb.style.display = "block";
+    verbHeading.style.display = "block";
+    verbLine.style.display = "block";
   }
 
   const adverb = document.querySelector("#adverb");
@@ -76,6 +113,10 @@ async function getDefinition(word) {
     adverb.style.display = "none";
     adverbHeading.style.display = "none";
     adverbLine.style.display = "none";
+  } else {
+    adverb.style.display = "block";
+    adverbHeading.style.display = "block";
+    adverbLine.style.display = "block";
   }
 
   const adjective = document.querySelector("#adjective"); 
@@ -85,17 +126,64 @@ async function getDefinition(word) {
     adjective.style.display = "none";
     adjectiveHeading.style.display = "none";
     adjectiveLine.style.display = "none";
+  } else if (obj.meaning.verb === "" && obj.meaning.adverb === "" && obj.meaning.noun === "") {
+    adjectiveLine.style.display = "none";
+  } else {
+    adjective.style.display = "block";
+    adjectiveHeading.style.display = "block";
+    adjectiveLine.style.display = "block";
   }
 
   //inputSearch.value = ""; 
 } 
 
+async function getDetails(word) {
+  let response = await fetch(
+    `http://api.dictionaryapi.dev/api/v2/entries/en/${word.value}`,
+    {
+      headers: { accept: "application/json" },
+    }
+  );
+  const data = await response.json();
+
+  //console.log(data[0].phonetics[0].audio);
+  console.log(data[0]);
+
+  phonetic.textContent = data[0].phonetic;
+  let audioLocation = data[0].phonetics[0].audio;
+
+  // tried to save in variable but app doesnt work when trying to yuse variable in if statements
+  //const secAudioLocation = data[0].phonetics[1].audio;
+  
+  //show audio if found
+  if (audioLocation !== "") {
+    audio.style.display = "block";
+    audio.src = audioLocation;
+  } else if (data[0].phonetics[1].audio !== "" && audioLocation == "") {
+    audio.style.display = "block";
+    audio.src = data[0].phonetics[1].audio;
+  } else if (data[0].phonetics[1].audio !== "" && audioLocation !== "") {
+    audio.style.display = "none";
+  } 
+
+    console.log("....", audio);
+}
+
 
 
 button.addEventListener("click", () => {
 console.log(inputSearch.value)
-  let meaning = getDefinition(inputSearch)
-  console.log(meaning)
+  let firstAPI = getDefinition(inputSearch)
+  let secondAPI = getDetails(inputSearch);
+
+  if (firstAPI !== '' && secondAPI !== '') {
+    initialDisplay.style.marginTop = '8vh'
+    info.style.display = "block";
+    initialDisplay.style.transition=
+      "initialDisplay.style.marginTop 1s ease-in";
+  }
+  //console.log(meaning)
+  //console.log("this is details", details);
   
  inputSearch.value="";
 });

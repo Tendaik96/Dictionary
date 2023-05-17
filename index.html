@@ -10,14 +10,23 @@
 </head>
 
 <body id="root">
-    <h1>Dictionary</h1>
-    <div id="searching">
+    <div id="inital-display">
+        <h1 id="dictionary">Dictionary</h1>
+        <div id="searching">
 
-        <input id="searchBox" type="search" name="search" value="" placeholder="Search for any word" required/>
-        <button id="button">Search</button>
+            <input id="searchBox" type="search" name="search" value="" placeholder="Search for any word" required/>
+            <button id="button">Search</button>
+        </div>
     </div>
     <div id="info">
         <h3 id="meaning"></h3>
+
+        <h5 id="phonetic"></h5>
+        <audio src="" controls>
+            Your browser does not support the audio element.
+        </audio>
+
+        
 
         <div id="definitions">
             <section>
