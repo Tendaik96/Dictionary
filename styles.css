@@ -77,7 +77,7 @@ h1 {
     border-radius: 10px;
 }
 
-input{
+#searchBox{
     margin: 20px 0 20px 20px;
     width: 80%;
     resize: vertical;
@@ -85,14 +85,17 @@ input{
     padding: 10px;
     text-indent: 5px;
     text-overflow: ellipsis;
+    border: none;
 }
 
-input:focus{
+#searchBox:focus{
     /* background-color: rgb(158, 101, 223);
     color: white; */
+    outline: 0;
+    border: 1px solid purple;
 }
 
-/* input:focus{
+/* #searchBox:focus{
     
 } */
 
@@ -121,17 +124,18 @@ input:focus{
     border-radius: 10px;
     padding: 3px 6px;
     background-image: rgba(255,255,255,0.9);
+    border: none;
     
 }
 
-button:hover{
+#button:hover{
     background-image: linear-gradient(rgba(243, 12, 32, 0.7), rgba(210, 10, 228, 0.6));
     color: seashell;
     transition: 750ms;
 }
 
 @media only screen and (max-width:720px) {
-    input{
+    #searchBox{
         padding: 5px;
     }
 }
@@ -163,11 +167,15 @@ audio{
     
 }
 
+audio::-webkit-media-controls-panel{
+    background-image: linear-gradient(rgba(243, 12, 32, 0.5), rgba(210, 10, 228, 0.4))
+}
+
 
 #meaning{
     
     height: auto;
-    padding-top: 10px;
+    margin-top: 5vh;
     font-size: 2.5em;
     text-transform: capitalize;
     margin-bottom: 20px;

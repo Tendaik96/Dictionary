@@ -40,10 +40,21 @@ const antonymsDetail = document.getElementById("antonyms-detail");
 const synonymsDetail = document.getElementById("synonyms-detail");
 const exampleDetail = document.getElementById("example-detail");
 
-// details heading
+// antonyms details
 const antonymsHeading = document.getElementById("antonyms-heading");
 const antonyms = document.getElementById("antonyms");
 const antonymsBtn = document.getElementById("antonyms-btn");
+
+// synonyms details
+const synonymsHeading = document.getElementById("synonyms-heading");
+const synonyms = document.getElementById("synonyms");
+const synonymsBtn = document.getElementById("synonyms-btn");
+
+// example details
+const exampleHeading = document.getElementById("example-heading");
+const example = document.getElementById("example");
+const exampleBtn = document.getElementById("example-btn");
+
 
 antonymsDetail.style.display = 'none';
 synonymsDetail.style.display = "none";
@@ -61,6 +72,8 @@ if (meaning.textContent == "") {
   body.style.minHeight = '100vh';
   input.style.width = '100%';
   antonymsDetail.style.display = 'none';
+  synonymsDetail.style.display = "none";
+  exampleDetail.style.display = "none";
 } 
 
 
@@ -94,7 +107,9 @@ async function getDefinition(word) {
   console.log("this is obj", obj);
 
   let meaning = document.querySelector("#meaning");
-  meaning.textContent = obj.entry;
+  if (obj.entry !== "") {
+   meaning.textContent = obj.entry; 
+  }
 
 //NOUN
    const noun = document.querySelector("#noun");
@@ -181,21 +196,31 @@ async function getAudio(word) {
   } else if (data[0].phonetics[1].audio !== "" && audioLocation !== "") {
     audio.style.display = "none";
   } 
-    console.log("....", audio);
 }
 
 
 
+
 button.addEventListener("click", (e) => {
-  e.preventDefault();
-console.log(inputSearch.value)
+ 
+  console.log(inputSearch.value)
+  
+
   let firstAPI = getDefinition(inputSearch)
   let secondAPI = getAudio(inputSearch);
-  let antonymsAPI = getAntonyms(inputSearch)
+  let antonymsAPI = getAntonyms(inputSearch);
+  let synonmysAPI = getSynonym(inputSearch);
 
-  if (firstAPI !== '' ) {
+  console.log(synonmysAPI)
+
+  if (inputSearch.value == "") {
+    info.style.display = "none";
+    initialDisplay.style.margin = "auto 0";
+    
+  } else if (firstAPI !== '' ) {
     initialDisplay.style.margin = "8vh 0 5vh 0";
     info.style.display = "block";
+    e.preventDefault();
   }
     inputSearch.value = "";
 });
@@ -224,18 +249,44 @@ if (obj.antonyms.length == 0) {
     if (antonymsDetail.style.display === "none") {
       antonymsDetail.style.display = "flex";
 
-      if (data.payload.antonym.antonyms !== "" || []) {
+      if (obj.antonyms.length !== 0) {
         antonyms.textContent = obj.antonyms.join(", ");
         antonymsBtn.style.display = "block";
       }
     } else {
       antonymsDetail.style.display = "none";
-    }
-
-  });
-  
+      }
+    });
+  } 
 }
-  
+
+async function getSynonym(word) {
+  const response = await fetch(`http://localhost:3000/synonym/${word.value}`);
+
+  const data = await response.json();
+  //console.log("this is data", data);
+
+  const obj = await JSON.parse(data.payload);
+  console.log("this is objjlll", obj.synonyms.join(", "));
+
+  if (obj.synonyms.length == 0) {
+    synonymsBtn.style.display = "none";
+  } else {
+    synonymsBtn.style.display = "block";
+    synonymsBtn.addEventListener("click", () => {
+      if (synonymsDetail.style.display === "none") {
+        synonymsDetail.style.display = "flex";
+        
+
+        if (obj.synonyms.length !== 0) {
+          synonyms.textContent = obj.synonyms.join(", ");
+          synonymsBtn.style.display = "block";
+        }
+      } else {
+        synonymsDetail.style.display = "none";
+      }
+    });
+  }
 }
 
    
