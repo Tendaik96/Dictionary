@@ -38,7 +38,7 @@ const dictionary = document.getElementById('dictionary')
 //detail buttons display
 const antonymsDetail = document.getElementById("antonyms-detail");
 const synonymsDetail = document.getElementById("synonyms-detail");
-const exampleDetail = document.getElementById("example-detail");
+const examplesDetail = document.getElementById("example-detail");
 
 // antonyms details
 const antonymsHeading = document.getElementById("antonyms-heading");
@@ -51,14 +51,14 @@ const synonyms = document.getElementById("synonyms");
 const synonymsBtn = document.getElementById("synonyms-btn");
 
 // example details
-const exampleHeading = document.getElementById("example-heading");
-const example = document.getElementById("example");
-const exampleBtn = document.getElementById("example-btn");
+const examplesHeading = document.getElementById("example-heading");
+const examples = document.getElementById("example");
+const examplesBtn = document.getElementById("example-btn");
 
 
 antonymsDetail.style.display = 'none';
 synonymsDetail.style.display = "none";
-exampleDetail.style.display = "none";
+examplesDetail.style.display = "none";
   
 //test if the button works
 /* button.addEventListener("click", () => {
@@ -73,7 +73,7 @@ if (meaning.textContent == "") {
   input.style.width = '100%';
   antonymsDetail.style.display = 'none';
   synonymsDetail.style.display = "none";
-  exampleDetail.style.display = "none";
+  examplesDetail.style.display = "none";
 } 
 
 
@@ -210,8 +210,9 @@ button.addEventListener("click", (e) => {
   let secondAPI = getAudio(inputSearch);
   let antonymsAPI = getAntonyms(inputSearch);
   let synonmysAPI = getSynonym(inputSearch);
+  let examplesAPI = getExamples(inputSearch)
 
-  console.log(synonmysAPI)
+  console.log(examplesAPI)
 
   if (inputSearch.value == "") {
     info.style.display = "none";
@@ -284,6 +285,34 @@ async function getSynonym(word) {
         }
       } else {
         synonymsDetail.style.display = "none";
+      }
+    });
+  }
+}
+
+async function getExamples(word) {
+  const response = await fetch(`http://localhost:3000/examples/${word.value}`);
+
+  const data = await response.json();
+  //console.log("this is data", data);
+
+  const obj = await JSON.parse(data.payload);
+  console.log("this is objj123", obj.examples.join(", "));
+
+  if (obj.examples.length == 0) {
+    examplesBtn.style.display = "none";
+  } else {
+    examplesBtn.style.display = "block";
+    examplesBtn.addEventListener("click", () => {
+      if (examplesDetail.style.display === "none") {
+        examplesDetail.style.display = "flex";
+
+        if (obj.examples.length !== 0) {
+          examples.textContent = obj.examples.join(", ");
+          examplesBtn.style.display = "block";
+        }
+      } else {
+        examplesDetail.style.display = "none";
       }
     });
   }

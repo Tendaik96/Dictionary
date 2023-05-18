@@ -44,6 +44,11 @@ h1{
     margin-bottom: 2vh;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
 @media only screen and (max-width:720px){
 h1 {
         font-size: 3em;
@@ -55,7 +60,6 @@ h1 {
 
 #inital-display{
     width: 100%;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,6 +90,7 @@ h1 {
     text-indent: 5px;
     text-overflow: ellipsis;
     border: none;
+    
 }
 
 #searchBox:focus{
@@ -93,6 +98,7 @@ h1 {
     color: white; */
     outline: 0;
     border: 1px solid purple;
+    
 }
 
 /* #searchBox:focus{
@@ -117,21 +123,29 @@ h1 {
     color: black;
     letter-spacing: 1px;
     background-color: rgb(227, 226, 226);
+    border: 0.5px solid black;
+}
+
+.more-info:hover{
+    background-image: linear-gradient(rgba(243, 12, 32, 0.7), rgba(210, 10, 228, 0.6));
+        color: seashell;
+        transition: 750ms;
 }
 
 #button{
     margin: 20px 10px 20px 10px;
     border-radius: 10px;
     padding: 3px 6px;
-    background-image: rgba(255,255,255,0.9);
+    background-image: linear-gradient(rgba(243, 12, 32, 0.7), rgba(210, 10, 228, 0.6));
     border: none;
     
 }
 
 #button:hover{
-    background-image: linear-gradient(rgba(243, 12, 32, 0.7), rgba(210, 10, 228, 0.6));
+    background-image: linear-gradient(rgba(243, 12, 32, 1), rgba(210, 10, 228, 1));
     color: seashell;
-    transition: 750ms;
+    transition: 650ms;
+    border: 1px solid black;
 }
 
 @media only screen and (max-width:720px) {
