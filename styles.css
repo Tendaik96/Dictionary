@@ -25,7 +25,7 @@ body{
 }
 
 body::after {
-    background-image: linear-gradient(rgba(243, 12, 32, 0.8), rgba(210, 10, 228, 0.5)),url("./puzzle.jpg");
+    background-image: linear-gradient(rgba(243, 12, 32, 0.7), rgba(210, 10, 228, 0.4)),url("./puzzle.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     content: "";
@@ -34,7 +34,51 @@ body::after {
     inset: 0;
     opacity: 0.8;
     
-   
+    -webkit-animation: Animation 50s linear infinite;
+    -moz-animation: Animation 50s linear infinite;
+    animation: var(--ccAfter, Animation 50s linear infinite);
+}
+
+@-webkit-keyframes Animation {
+    0% {
+        background-image: 10% 0%
+    }
+
+    50% {
+        background-image: 91% 100%
+    }
+
+    100% {
+        background-image: 10% 0%
+    }
+}
+
+@-moz-keyframes Animation {
+    0% {
+        background-position: 10% 0%
+    }
+
+    50% {
+        background-position: 91% 100%
+    }
+
+    100% {
+        background-position: 10% 0%
+    }
+}
+
+@keyframes Animation {
+    0% {
+        background-position: 10% 0%
+    }
+
+    50% {
+        background-position: 91% 100%
+    }
+
+    100% {
+        background-position: 10% 0%
+    }
 }
 
 /* HEADING */

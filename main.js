@@ -1,6 +1,5 @@
 // capture search box
 let inputSearch = document.querySelector("#searchBox");
-
 /* inputSearch.addEventListener("change", handleChange); */
 
 // capture button
@@ -104,12 +103,16 @@ async function getDefinition(word) {
   //console.log("this is data", data);
 
   const obj = await JSON.parse(data.payload);
-  console.log("this is obj", obj);
+  //console.log("this is obj", obj);
 
   let meaning = document.querySelector("#meaning");
   if (obj.entry !== "") {
-   meaning.textContent = obj.entry; 
+    meaning.textContent = obj.entry;
+  } else {
+    
+    return alert("This word does not exist, please try again");
   }
+
 
 //NOUN
    const noun = document.querySelector("#noun");
@@ -144,7 +147,7 @@ async function getDefinition(word) {
     adverb.style.display = "none";
     adverbHeading.style.display = "none";
     adverbLine.style.display = "none";
-  } else {
+  } else{
     adverb.style.display = "block";
     adverbHeading.style.display = "block";
     adverbLine.style.display = "block";
@@ -203,26 +206,30 @@ async function getAudio(word) {
 
 button.addEventListener("click", (e) => {
  
+
   console.log(inputSearch.value)
   
-
   let firstAPI = getDefinition(inputSearch)
   let secondAPI = getAudio(inputSearch);
   let antonymsAPI = getAntonyms(inputSearch);
   let synonmysAPI = getSynonym(inputSearch);
   let examplesAPI = getExamples(inputSearch)
 
-  console.log(examplesAPI)
+  console.log("look here",firstAPI)
 
   if (inputSearch.value == "") {
     info.style.display = "none";
     initialDisplay.style.margin = "auto 0";
-    
+    body.style.setProperty("--ccAfter", "Animation 50s linear infinite");
+    //////////////////////////COME BACK HERE
   } else if (firstAPI !== '' ) {
     initialDisplay.style.margin = "8vh 0 5vh 0";
     info.style.display = "block";
     e.preventDefault();
+
+    body.style.setProperty('--ccAfter', '0');
   }
+  
     inputSearch.value = "";
 });
 
@@ -238,27 +245,26 @@ async function getAntonyms(word) {
   //console.log("this is data", data);
 
   const obj = await JSON.parse(data.payload.antonym);
-  console.log("this is objj", obj.antonyms.length);
+  console.log("this is obj", obj.word);
 
 // condition needs to be outside
 if (obj.antonyms.length == 0) {
     antonymsBtn.style.display = "none";
 } else{
   antonymsBtn.style.display = "block";
-   antonymsBtn.addEventListener('click', () => {
+  antonymsBtn.addEventListener("click", () => {
+      if (antonymsDetail.style.display === "none") {
+        antonymsDetail.style.display = "flex";
 
-    if (antonymsDetail.style.display === "none") {
-      antonymsDetail.style.display = "flex";
-
-      if (obj.antonyms.length !== 0) {
-        antonyms.textContent = obj.antonyms.join(", ");
-        antonymsBtn.style.display = "block";
-      }
+          if (obj.antonyms.length !== 0) {
+            antonyms.textContent = obj.antonyms.join(", ");
+            antonymsBtn.style.display = "block";
+          }
     } else {
       antonymsDetail.style.display = "none";
-      }
-    });
-  } 
+    }
+  });
+} 
 }
 
 async function getSynonym(word) {
@@ -268,16 +274,15 @@ async function getSynonym(word) {
   //console.log("this is data", data);
 
   const obj = await JSON.parse(data.payload);
-  console.log("this is objjlll", obj.synonyms.join(", "));
+  console.log("this is objjlll", obj.word);
 
   if (obj.synonyms.length == 0) {
     synonymsBtn.style.display = "none";
-  } else {
+  } else{
     synonymsBtn.style.display = "block";
     synonymsBtn.addEventListener("click", () => {
       if (synonymsDetail.style.display === "none") {
         synonymsDetail.style.display = "flex";
-        
 
         if (obj.synonyms.length !== 0) {
           synonyms.textContent = obj.synonyms.join(", ");
@@ -297,18 +302,18 @@ async function getExamples(word) {
   //console.log("this is data", data);
 
   const obj = await JSON.parse(data.payload);
-  console.log("this is objj123", obj.examples.join(", "));
+  console.log("this is objj123", obj.word);
 
   if (obj.examples.length == 0) {
     examplesBtn.style.display = "none";
-  } else {
+  } else{
     examplesBtn.style.display = "block";
     examplesBtn.addEventListener("click", () => {
       if (examplesDetail.style.display === "none") {
         examplesDetail.style.display = "flex";
 
         if (obj.examples.length !== 0) {
-          examples.textContent = obj.examples.join(", ");
+          examples.textContent = obj.examples.join(" || ");
           examplesBtn.style.display = "block";
         }
       } else {
