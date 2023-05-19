@@ -38,7 +38,11 @@ NodeJs, Express
 - Create a database which can save all the words a user has searched.
 - Create a Thesaurus app and incorporate it into this app.
 
+Frontend
+- https://medium.com/how-tos-for-coders/https-medium-com-kaushalshah1307-get-pseudo-elements-using-javascript-b64c88a96c46
+- https://stackoverflow.com/questions/59024693/style-the-audio-html-tag
 
 Backend
 - https://rapidapi.com/dpventures/api/wordsapi
 - https://rapidapi.com/twinword/api/word-dictionary
+- https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
