@@ -1,3 +1,5 @@
+
+
 // capture search box
 let inputSearch = document.querySelector("#searchBox");
 /* inputSearch.addEventListener("change", handleChange); */
@@ -6,17 +8,17 @@ let inputSearch = document.querySelector("#searchBox");
 const button = document.querySelector("#button");
 
 //get phonetic
-const phonetic = document.querySelector('#phonetic')
+const phonetic = document.querySelector("#phonetic");
 
 // get all paragraph by id
-let meaning = document.getElementById('meaning')
+let meaning = document.getElementById("meaning");
 let noun = document.getElementById("noun");
 let verb = document.getElementById("verb");
 let adverb = document.getElementById("adverb");
 let adjective = document.getElementById("adjective");
 
 //get heading
-const nounHeading = document.getElementById('noun-heading');
+const nounHeading = document.getElementById("noun-heading");
 const verbHeading = document.getElementById("verb-heading");
 const adverbHeading = document.getElementById("adverb-heading");
 const adjectiveHeading = document.getElementById("adjective-heading");
@@ -27,12 +29,12 @@ const adverbLine = document.getElementById("adverb-line");
 const adjectiveLine = document.getElementById("adjective-line");
 
 // his info section
-const info = document.getElementById('info');
-const options = document.getElementById('options')
+const info = document.getElementById("info");
+const options = document.getElementById("options");
 const initialDisplay = document.getElementById("inital-display");
-const body = document.querySelector('body');
-const input = document.querySelector('input')
-const dictionary = document.getElementById('dictionary')
+const body = document.querySelector("body");
+const input = document.querySelector("input");
+const dictionary = document.getElementById("dictionary");
 
 //detail buttons display
 const antonymsDetail = document.getElementById("antonyms-detail");
@@ -54,29 +56,24 @@ const examplesHeading = document.getElementById("example-heading");
 const examples = document.getElementById("example");
 const examplesBtn = document.getElementById("example-btn");
 
-
-antonymsDetail.style.display = 'none';
+antonymsDetail.style.display = "none";
 synonymsDetail.style.display = "none";
 examplesDetail.style.display = "none";
-  
+
 //test if the button works
 /* button.addEventListener("click", () => {
    console.log("clicked")
 }); */
 
-
 if (meaning.textContent == "") {
-  info.style.display = 'none';
+  info.style.display = "none";
   initialDisplay.style.margin = "auto 0";
-  body.style.minHeight = '100vh';
-  input.style.width = '100%';
-  antonymsDetail.style.display = 'none';
+  body.style.minHeight = "100vh";
+  input.style.width = "100%";
+  antonymsDetail.style.display = "none";
   synonymsDetail.style.display = "none";
   examplesDetail.style.display = "none";
-} 
-
-
-
+}
 
 //check input value in console - value prints in console
 
@@ -85,7 +82,7 @@ if (meaning.textContent == "") {
 //   getDefinition(inputSearch);
 // });
 
-const audio = document.querySelector('audio');
+const audio = document.querySelector("audio");
 /* function audioDisplay() {
   if(audio.src == "" || null || undefined) {
   audio.style.display = "none";
@@ -94,28 +91,30 @@ const audio = document.querySelector('audio');
 
 audioDisplay() */
 
-
 async function getDefinition(word) {
-
-  const response = await fetch(`http://localhost:3000/definition/${word.value}`);
+  const response = await fetch(
+    `http://localhost:3000/definition/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
 
   const obj = await JSON.parse(data.payload);
-  //console.log("this is obj", obj);
+  console.log("this is obj", obj.result_msg);
 
   let meaning = document.querySelector("#meaning");
-  if (obj.entry !== "") {
+  if (obj.entry !== "" && obj.result_msg !== "Entry word not found") {
     meaning.textContent = obj.entry;
   } else {
+    alert("This word does not exist. Please check the spelling and try again");
     
-    return alert("This word does not exist, please try again");
+    info.style.display = "none";
+    initialDisplay.style.margin = "auto 0";
+    body.style.setProperty("--ccAfter", "Animation 50s linear infinite");
   }
 
-
-//NOUN
-   const noun = document.querySelector("#noun");
+  //NOUN
+  const noun = document.querySelector("#noun");
   noun.textContent = obj.meaning.noun;
 
   //console.log(noun.textContent)
@@ -147,20 +146,24 @@ async function getDefinition(word) {
     adverb.style.display = "none";
     adverbHeading.style.display = "none";
     adverbLine.style.display = "none";
-  } else{
+  } else {
     adverb.style.display = "block";
     adverbHeading.style.display = "block";
     adverbLine.style.display = "block";
   }
 
-  const adjective = document.querySelector("#adjective"); 
+  const adjective = document.querySelector("#adjective");
   adjective.textContent = obj.meaning.adjective;
 
   if (obj.meaning.adjective === "") {
     adjective.style.display = "none";
     adjectiveHeading.style.display = "none";
     adjectiveLine.style.display = "none";
-  } else if (obj.meaning.verb === "" && obj.meaning.adverb === "" && obj.meaning.noun === "") {
+  } else if (
+    obj.meaning.verb === "" &&
+    obj.meaning.adverb === "" &&
+    obj.meaning.noun === ""
+  ) {
     adjectiveLine.style.display = "none";
   } else {
     adjective.style.display = "block";
@@ -168,8 +171,8 @@ async function getDefinition(word) {
     adjectiveLine.style.display = "block";
   }
 
-  //inputSearch.value = ""; 
-} 
+  //inputSearch.value = "";
+}
 
 async function getAudio(word) {
   let response = await fetch(
@@ -188,7 +191,7 @@ async function getAudio(word) {
 
   // tried to save in variable but app doesnt work when trying to yuse variable in if statements
   //const secAudioLocation = data[0].phonetics[1].audio;
-  
+
   //show audio if found
   if (audioLocation !== "") {
     audio.style.display = "block";
@@ -198,39 +201,34 @@ async function getAudio(word) {
     audio.src = data[0].phonetics[1].audio;
   } else if (data[0].phonetics[1].audio !== "" && audioLocation !== "") {
     audio.style.display = "none";
-  } 
+  }
 }
 
-
-
-
 button.addEventListener("click", (e) => {
- 
+  console.log(inputSearch.value);
 
-  console.log(inputSearch.value)
-  
-  let firstAPI = getDefinition(inputSearch)
+  let firstAPI = getDefinition(inputSearch);
   let secondAPI = getAudio(inputSearch);
   let antonymsAPI = getAntonyms(inputSearch);
   let synonmysAPI = getSynonym(inputSearch);
-  let examplesAPI = getExamples(inputSearch)
+  let examplesAPI = getExamples(inputSearch);
 
-  console.log("look here",firstAPI)
+  console.log("look here", firstAPI);
 
   if (inputSearch.value == "") {
     info.style.display = "none";
     initialDisplay.style.margin = "auto 0";
     body.style.setProperty("--ccAfter", "Animation 50s linear infinite");
     //////////////////////////COME BACK HERE
-  } else if (firstAPI !== '' ) {
+  } else if (firstAPI !== "") {
     initialDisplay.style.margin = "8vh 0 5vh 0";
     info.style.display = "block";
     e.preventDefault();
 
-    body.style.setProperty('--ccAfter', '0');
+    body.style.setProperty("--ccAfter", "0");
   }
-  
-    inputSearch.value = "";
+
+  inputSearch.value = "";
 });
 
 /* if (noun.textContent == undefined || ""){
@@ -247,24 +245,24 @@ async function getAntonyms(word) {
   const obj = await JSON.parse(data.payload.antonym);
   console.log("this is obj", obj.word);
 
-// condition needs to be outside
-if (obj.antonyms.length == 0) {
+  // condition needs to be outside
+  if (obj.antonyms.length == 0) {
     antonymsBtn.style.display = "none";
-} else{
-  antonymsBtn.style.display = "block";
-  antonymsBtn.addEventListener("click", () => {
+  } else {
+    antonymsBtn.style.display = "block";
+    antonymsBtn.addEventListener("click", () => {
       if (antonymsDetail.style.display === "none") {
         antonymsDetail.style.display = "flex";
 
-          if (obj.antonyms.length !== 0) {
-            antonyms.textContent = obj.antonyms.join(", ");
-            antonymsBtn.style.display = "block";
-          }
-    } else {
-      antonymsDetail.style.display = "none";
-    }
-  });
-} 
+        if (obj.antonyms.length !== 0) {
+          antonyms.textContent = obj.antonyms.join(", ");
+          antonymsBtn.style.display = "block";
+        }
+      } else {
+        antonymsDetail.style.display = "none";
+      }
+    });
+  }
 }
 
 async function getSynonym(word) {
@@ -278,7 +276,7 @@ async function getSynonym(word) {
 
   if (obj.synonyms.length == 0) {
     synonymsBtn.style.display = "none";
-  } else{
+  } else {
     synonymsBtn.style.display = "block";
     synonymsBtn.addEventListener("click", () => {
       if (synonymsDetail.style.display === "none") {
@@ -306,7 +304,7 @@ async function getExamples(word) {
 
   if (obj.examples.length == 0) {
     examplesBtn.style.display = "none";
-  } else{
+  } else {
     examplesBtn.style.display = "block";
     examplesBtn.addEventListener("click", () => {
       if (examplesDetail.style.display === "none") {
@@ -322,5 +320,3 @@ async function getExamples(word) {
     });
   }
 }
-
-   
