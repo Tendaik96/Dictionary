@@ -31,7 +31,7 @@ const adjectiveLine = document.getElementById("adjective-line");
 // his info section
 const info = document.getElementById("info");
 const options = document.getElementById("options");
-const initialDisplay = document.getElementById("inital-display");
+const initialDisplay = document.getElementById("initial-display");
 const body = document.querySelector("body");
 const input = document.querySelector("input");
 const dictionary = document.getElementById("dictionary");
@@ -100,7 +100,7 @@ async function getDefinition(word) {
   //console.log("this is data", data);
 
   const obj = await JSON.parse(data.payload);
-  console.log("this is obj", obj.result_msg);
+  //console.log("this is obj", obj.result_msg);
 
   let meaning = document.querySelector("#meaning");
   if (obj.entry !== "" && obj.result_msg !== "Entry word not found") {
