@@ -90,7 +90,7 @@ const audio = document.querySelector("audio");
 
 audioDisplay() */
 
-require("dotenv").config();
+//require("dotenv").config();
 const url = process.env.BACKEND_URL ?? "http://localhost:3000";
 
 async function getDefinition(word) {
