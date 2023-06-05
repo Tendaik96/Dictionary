@@ -261,9 +261,12 @@ async function getAntonyms(word) {
         if (obj.antonyms.length !== 0) {
           antonyms.textContent = obj.antonyms.join(", ");
           antonymsBtn.style.display = "block";
+          antonymsBtn.style.backgroundImage =
+            "linear-gradient(rgba(243, 12, 32, 1), rgba(210, 10, 228, 1))";
         }
       } else {
         antonymsDetail.style.display = "none";
+        antonymsBtn.style.backgroundImage = 'none';
       }
     });
   }
@@ -291,9 +294,13 @@ async function getSynonym(word) {
         if (obj.synonyms.length !== 0) {
           synonyms.textContent = obj.synonyms.join(", ");
           synonymsBtn.style.display = "block";
+          synonymsBtn.style.backgroundImage =
+            "linear-gradient(rgba(243, 12, 32, 1), rgba(210, 10, 228, 1))";
         }
       } else {
         synonymsDetail.style.display = "none";
+        synonymsBtn.style.backgroundImage =
+          "none";
       }
     });
   }
@@ -321,9 +328,12 @@ async function getExamples(word) {
         if (obj.examples.length !== 0) {
           examples.textContent = obj.examples.join(" || ");
           examplesBtn.style.display = "block";
+          examplesBtn.style.backgroundImage =
+            "linear-gradient(rgba(243, 12, 32, 1), rgba(210, 10, 228, 1))";
         }
       } else {
         examplesDetail.style.display = "none";
+        examplesBtn.style.backgroundImage = 'none'
       }
     });
   }

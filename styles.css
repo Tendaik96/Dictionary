@@ -95,11 +95,18 @@ a{
 
 @media only screen and (max-width:720px){
 h1 {
-        font-size: 3em;
+        font-size: 4em;
         
     }
 
 
+}
+
+#dictionary{
+-webkit-text-stroke: 0.5px white; 
+-moz-stroke: 0.5px white;
+-ms-text-stroke: 0.5px white;
+-o-text-stroke: 0.5px white;
 }
 
 #initial-display{
@@ -119,9 +126,6 @@ h1 {
     flex-direction: row;
     width: 60%;
     max-width: 600px;
-    
-    
-    
     border-radius: 10px;
 }
 
@@ -253,13 +257,9 @@ section{
     
 }
 
-
-
-
 h4{
     width: 110px;
-    margin: auto 0;
-
+    margin: auto 20px;
 }
 
 p{
