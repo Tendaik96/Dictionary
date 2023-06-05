@@ -1,4 +1,5 @@
 
+
 // capture search box
 let inputSearch = document.querySelector("#searchBox");
 /* inputSearch.addEventListener("change", handleChange); */
@@ -90,11 +91,10 @@ const audio = document.querySelector("audio");
 
 audioDisplay() */
 
-//require("dotenv").config();
-const url = process.env.BACKEND_URL ?? "http://localhost:3000";
-
 async function getDefinition(word) {
-  const response = await fetch(`${url}/definition/${word.value}`);
+  const response = await fetch(
+    `https://dictionary-backend.onrender.com/definition/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
@@ -102,12 +102,14 @@ async function getDefinition(word) {
   const obj = await JSON.parse(data.payload);
   //console.log("this is obj", obj.result_msg);
 
+    console.log(obj)
+
   let meaning = document.querySelector("#meaning");
   if (obj.entry !== "" && obj.result_msg !== "Entry word not found") {
     meaning.textContent = obj.entry;
   } else {
     alert("This word does not exist. Please check the spelling and try again");
-
+    
     info.style.display = "none";
     initialDisplay.style.margin = "auto 0";
     body.style.setProperty("--ccAfter", "Animation 50s linear infinite");
@@ -237,7 +239,9 @@ button.addEventListener("click", (e) => {
  } */
 
 async function getAntonyms(word) {
-  const response = await fetch(`${url}/antonym/${word.value}`);
+  const response = await fetch(
+    `https://dictionary-backend.onrender.com/antonym/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
@@ -266,7 +270,9 @@ async function getAntonyms(word) {
 }
 
 async function getSynonym(word) {
-  const response = await fetch(`${url}/synonym/${word.value}`);
+  const response = await fetch(
+    `https://dictionary-backend.onrender.com/synonym/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
@@ -294,7 +300,9 @@ async function getSynonym(word) {
 }
 
 async function getExamples(word) {
-  const response = await fetch(`${url}/examples/${word.value}`);
+  const response = await fetch(
+    `https://dictionary-backend.onrender.com/examples/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
