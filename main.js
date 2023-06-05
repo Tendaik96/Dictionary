@@ -1,4 +1,4 @@
-
+require("dotenv").config();
 
 // capture search box
 let inputSearch = document.querySelector("#searchBox");
@@ -107,7 +107,7 @@ async function getDefinition(word) {
     meaning.textContent = obj.entry;
   } else {
     alert("This word does not exist. Please check the spelling and try again");
-    
+
     info.style.display = "none";
     initialDisplay.style.margin = "auto 0";
     body.style.setProperty("--ccAfter", "Animation 50s linear infinite");
