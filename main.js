@@ -208,7 +208,7 @@ button.addEventListener("click", (e) => {
   console.log(inputSearch.value);
 
   let firstAPI = getDefinition(inputSearch);
-  let secondAPI = getAudio(inputSearch);
+  let audioAPI = getAudio(inputSearch);
   let antonymsAPI = getAntonyms(inputSearch);
   let synonmysAPI = getSynonym(inputSearch);
   let examplesAPI = getExamples(inputSearch);
@@ -237,7 +237,9 @@ button.addEventListener("click", (e) => {
  } */
 
 async function getAntonyms(word) {
-  const response = await fetch(`http://localhost:3000/antonym/${word.value}`);
+  const response = await fetch(
+    `https://dictionary-backend.onrender.com/antonym/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
@@ -266,7 +268,9 @@ async function getAntonyms(word) {
 }
 
 async function getSynonym(word) {
-  const response = await fetch(`http://localhost:3000/synonym/${word.value}`);
+  const response = await fetch(
+    `https://dictionary-backend.onrender.com/synonym/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
@@ -294,7 +298,9 @@ async function getSynonym(word) {
 }
 
 async function getExamples(word) {
-  const response = await fetch(`http://localhost:3000/examples/${word.value}`);
+  const response = await fetch(
+    `https://dictionary-backend.onrender.com/examples/${word.value}`
+  );
 
   const data = await response.json();
   //console.log("this is data", data);
