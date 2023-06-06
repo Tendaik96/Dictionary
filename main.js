@@ -178,7 +178,7 @@ async function getDefinition(word) {
 
 async function getAudio(word) {
   let response = await fetch(
-    `http://api.dictionaryapi.dev/api/v2/entries/en/${word.value}`,
+    `https://api.dictionaryapi.dev/api/v2/entries/en/${word.value}`,
     {
       headers: { accept: "application/json" },
     }
