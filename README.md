@@ -1,8 +1,5 @@
 
 # Dictionary app
-
-
-
 How to use the app:
 go to www.
 Here your greeted with a landing page.
@@ -46,3 +43,8 @@ Backend
 - https://rapidapi.com/dpventures/api/wordsapi
 - https://rapidapi.com/twinword/api/word-dictionary
 - https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
+
+## Deployment instructions
+- https://paragon.ba/en/how-to-deploy-a-mern-application-on-render-com/
+- https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express/
+- https://expressjs.com/en/resources/middleware/cors.html

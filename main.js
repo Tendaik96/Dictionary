@@ -108,11 +108,11 @@ async function getDefinition(word) {
   if (obj.entry !== "" && obj.result_msg !== "Entry word not found") {
     meaning.textContent = obj.entry;
   } else {
-    alert("This word does not exist. Please check the spelling and try again");
-    
-    info.style.display = "none";
+    meaning.textContent = input.value
+      info.style.display = "none";
     initialDisplay.style.margin = "auto 0";
     body.style.setProperty("--ccAfter", "Animation 50s linear infinite");
+    setTimeout(()=>{alert("This word does not exist. Please check the spelling and try again")} , 10)
   }
 
   //NOUN
