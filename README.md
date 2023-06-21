@@ -4,8 +4,8 @@ How to use the app:
 go to www.
 Here your greeted with a landing page.
 
-the functionalities of this site are very simple and straigh tot the point. the first thing you need to do 
-1. Choose a word you are trying to define and put it in the search box (Please ensure that the word you have entered is correctly spelt otherwise there will be no data rendered).
+the functionalities of this site are very simple and straigh to the point. the first thing you need to do 
+1. Choose a word you are want to define and put it in the search box (Please ensure that the word you have entered is correctly spelt otherwise there will be no data rendered).
 2. Click the 'Search' button.
 3. An infomation box containing the word you searched and further details about that specific word.
 
@@ -20,7 +20,7 @@ The data that is available includes:
 The way that the data renders all depends on if the information is available in the API used to create this project. 
 
 ## Problems with the app
-- If you try to search a few words within a short amount of time, the data will not render. This is not an issue that can be solved by javascript; the APIs used can only handle a certain amount of requests within a given time period. To solve this issue, you need to refersh the browser. 
+- If you try to search a few words within a short amount of time, the data will not render. This is not an issue that can be solved by JavaScript; the APIs used can only handle a certain amount of requests within a given time period. To solve this issue, you need to refresh the browser.
 - Some words may have more information, but it may not be available within the APIs used.
  
 
