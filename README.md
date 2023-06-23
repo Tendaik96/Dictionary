@@ -1,10 +1,6 @@
 
 # Dictionary app
 How to use the app:
-go to www.
-Here your greeted with a landing page.
-
-the functionalities of this site are very simple and straigh to the point. the first thing you need to do 
 1. Choose a word you are want to define and put it in the search box (Please ensure that the word you have entered is correctly spelt otherwise there will be no data rendered).
 2. Click the 'Search' button.
 3. An infomation box containing the word you searched and further details about that specific word.
