@@ -16,9 +16,10 @@ The data that is available includes:
 The way that the data renders all depends on if the information is available in the API used to create this project. 
 
 ## Problems with the app
-- If you try to search a few words within a short amount of time, the data will not render. This is not an issue that can be solved by JavaScript; the APIs used can only handle a certain amount of requests within a given time period. To solve this issue, you need to refresh the browser.
-- Some words may have more information, but it may not be available within the APIs used.
- 
+- The first problem relates to the rendering of data when multiple word searches are performed quickly. Due to limitations in the APIs used by the app, there is a restriction on the number of requests that can be handled within a specific time period. Consequently, if you search for several words in a short amount of time, some of the data may fail to render. The best solution to this issue is to refresh the browser and search for the same word again.
+- The second problem pertains to the availability of information for certain words. Although the app may have the capability to display more detailed information for certain words, this additional data may not be accessible through the APIs employed by the app. Essentially, the app is limited by the information provided by the APIs, and as a result, some words may not have the desired level of detail or additional information.
+
+This is a common limitations or issues that can occur in app's relying on external APIs for data retrieval and display.
 
 ## 🛠 Frontend Techstack
 Javascript, HTML, CSS
